@@ -9,6 +9,9 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
 import java.util.concurrent.CompletionStage;
 
@@ -29,6 +32,9 @@ public class UrlShortenerCreateResourceImpl implements UrlShortenerCreateResourc
 
     @Override
     @POST
+    @APIResponse(responseCode = "201", description = "Url created", content = @Content(schema = @Schema(implementation = Url.class)))
+    @APIResponse(responseCode = "400", description = "Bad request")
+    @APIResponse(responseCode = "500", description = "Internal server error")
     public CompletionStage<Url> create(UrlShortenerViewModel urlShortenerViewModel) {
         return delegate.create(urlShortenerViewModel);
     }
