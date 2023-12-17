@@ -21,7 +21,11 @@ public class SHA1Calculator implements Calculate {
             MessageDigest msdDigest = MessageDigest.getInstance("SHA-1");
             msdDigest.update(url.getBytes(StandardCharsets.UTF_8), 0, url.length());
             var sha1 = DatatypeConverter.printHexBinary(msdDigest.digest()) .substring(0, 8).toLowerCase();
-            return completedStage(new Url(url, "http://shortner.com/".concat(sha1)));
+            return completedStage(Url.builder()
+                    .withCode(sha1)
+                    .withOriginalUrl(url)
+                    .withShortUrl("http://shortner.com/".concat(sha1))
+                    .build());
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

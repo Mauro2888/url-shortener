@@ -23,7 +23,7 @@ public class MustacheFactory {
             var writer = new StringWriter();
             compile.execute(writer, url).flush();
             return Url.builder()
-                    .shortUrl(writer.toString())
+                    .withShortUrl(writer.toString())
                     .build();
         } catch (IOException e) {
             throw new RuntimeException(e);

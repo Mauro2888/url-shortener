@@ -16,7 +16,11 @@ public class UUIDCalculator implements Calculate {
     public CompletionStage<Url> generate(String url) {
         var result = UUID.randomUUID().toString().replaceAll("-", "")
                 .substring(0, 8).toLowerCase();
-        return completedStage(new Url(url, "http://shortner.com/".concat(result)));
+        return completedStage(Url.builder()
+                .withCode(result)
+                .withOriginalUrl(url)
+                .withShortUrl("http://shortner.com/".concat(result))
+                .build());
     }
 
     @Override
