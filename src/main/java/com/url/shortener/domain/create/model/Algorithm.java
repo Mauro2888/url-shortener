@@ -1,4 +1,4 @@
-package com.url.shortener.domain.model;
+package com.url.shortener.domain.create.model;
 
 public enum Algorithm {
     MD5,

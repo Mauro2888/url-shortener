@@ -1,9 +1,9 @@
-package com.url.shortener.domain.impl;
+package com.url.shortener.domain.create.impl;
 
-import com.url.shortener.domain.UrlShortenerCreateService;
-import com.url.shortener.domain.impl.factory.UrlHashingCalculator;
-import com.url.shortener.domain.model.Url;
-import com.url.shortener.domain.model.UrlShortener;
+import com.url.shortener.domain.create.UrlShortenerCreateService;
+import com.url.shortener.domain.create.impl.factory.UrlHashingCalculator;
+import com.url.shortener.domain.create.model.Url;
+import com.url.shortener.domain.create.model.UrlShortener;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

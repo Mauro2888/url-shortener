@@ -1,10 +1,10 @@
-package com.url.shortener.resource;
+package com.url.shortener.inbound.create;
 
 import com.url.shortener.common.qualifier.Delegate;
-import com.url.shortener.domain.UrlShortenerCreateService;
-import com.url.shortener.domain.model.Algorithm;
-import com.url.shortener.domain.model.Url;
-import com.url.shortener.domain.model.UrlShortener;
+import com.url.shortener.domain.create.UrlShortenerCreateService;
+import com.url.shortener.domain.create.model.Algorithm;
+import com.url.shortener.domain.create.model.Url;
+import com.url.shortener.domain.create.model.UrlShortener;
 import com.url.shortener.vm.UrlShortenerViewModel;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;

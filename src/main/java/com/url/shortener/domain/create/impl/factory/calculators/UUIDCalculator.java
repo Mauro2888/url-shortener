@@ -1,8 +1,8 @@
-package com.url.shortener.domain.impl.factory.calculators;
+package com.url.shortener.domain.create.impl.factory.calculators;
 
-import com.url.shortener.domain.impl.factory.Calculate;
-import com.url.shortener.domain.model.Algorithm;
-import com.url.shortener.domain.model.Url;
+import com.url.shortener.domain.create.impl.factory.Calculate;
+import com.url.shortener.domain.create.model.Algorithm;
+import com.url.shortener.domain.create.model.Url;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.UUID;

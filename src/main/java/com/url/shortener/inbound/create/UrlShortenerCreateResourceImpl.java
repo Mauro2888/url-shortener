@@ -1,8 +1,7 @@
-package com.url.shortener.resource;
+package com.url.shortener.inbound.create;
 
 import com.url.shortener.common.qualifier.Delegate;
-import com.url.shortener.domain.model.Url;
-import com.url.shortener.resource.mustache.MustacheFactory;
+import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.vm.UrlShortenerViewModel;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -17,7 +16,6 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import java.util.concurrent.CompletionStage;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
-import static java.util.concurrent.CompletableFuture.completedStage;
 
 @RequestScoped
 @Path("api/v1/shortener")

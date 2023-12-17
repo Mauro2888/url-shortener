@@ -1,9 +1,7 @@
-package com.url.shortener.resource.mustache;
+package com.url.shortener.inbound.mustache;
 
 import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
-import com.url.shortener.domain.model.Url;
-import jakarta.enterprise.context.ApplicationScoped;
+import com.url.shortener.domain.create.model.Url;
 
 import java.io.IOException;
 import java.io.StringWriter;

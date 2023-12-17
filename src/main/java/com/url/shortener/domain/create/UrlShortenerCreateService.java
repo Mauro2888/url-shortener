@@ -1,7 +1,7 @@
-package com.url.shortener.domain;
+package com.url.shortener.domain.create;
 
-import com.url.shortener.domain.model.Url;
-import com.url.shortener.domain.model.UrlShortener;
+import com.url.shortener.domain.create.model.Url;
+import com.url.shortener.domain.create.model.UrlShortener;
 
 import java.util.concurrent.CompletionStage;
 

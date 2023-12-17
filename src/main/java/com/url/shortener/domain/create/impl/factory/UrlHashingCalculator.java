@@ -1,8 +1,8 @@
-package com.url.shortener.domain.impl.factory;
+package com.url.shortener.domain.create.impl.factory;
 
 import com.url.shortener.common.exception.NotFoundException;
-import com.url.shortener.domain.model.Algorithm;
-import com.url.shortener.domain.model.Url;
+import com.url.shortener.domain.create.model.Algorithm;
+import com.url.shortener.domain.create.model.Url;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
