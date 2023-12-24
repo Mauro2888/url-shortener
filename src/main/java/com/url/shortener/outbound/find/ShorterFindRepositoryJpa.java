@@ -33,7 +33,7 @@ public class ShorterFindRepositoryJpa implements UrlShorterFindRepository {
 
     @Override
     public CompletionStage<Url> find(String code) {
-        return supplyAsync(() -> findSync(code));
+        return executor.supplyAsync(() -> findSync(code));
     }
 
     public Url findSync(String code) {
