@@ -1,10 +1,10 @@
 package com.url.shortener.inbound.find;
 
 import com.url.shortener.common.qualifier.ResourceDelegate;
-import com.url.shortener.vm.UrlShortenerViewModel;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -33,7 +33,7 @@ public class UrlShorterFindResourceImpl implements UrlShorterFindResource {
     @APIResponse(responseCode = "200", description = "Url found")
     @APIResponse(responseCode = "400", description = "Bad request")
     @APIResponse(responseCode = "500", description = "Internal server error")
-    public CompletionStage<UrlShortenerViewModel> find(
+    public CompletionStage<Response> find(
             @Parameter(
                     name = "code",
                     description = "short url code",
