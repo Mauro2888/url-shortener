@@ -2,6 +2,7 @@ package com.url.shortener.vm;
 
 import jakarta.json.bind.annotation.JsonbTransient;
 
+
 public record UrlShortenerViewModel(String originalUrl,
                                     AlgorithmViewModel algorithmViewModel) {
 
@@ -23,6 +24,7 @@ public record UrlShortenerViewModel(String originalUrl,
             return new UrlShortenerViewModel(originalUrl, algorithmViewModel);
         }
     }
+
     @JsonbTransient
     public static Builder builder() {
         return new Builder();

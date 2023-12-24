@@ -1,6 +1,6 @@
 package com.url.shortener.inbound.create;
 
-import com.url.shortener.common.qualifier.Delegate;
+import com.url.shortener.common.qualifier.ResourceDelegate;
 import com.url.shortener.domain.create.UrlShortenerCreateService;
 import com.url.shortener.domain.create.model.Algorithm;
 import com.url.shortener.domain.create.model.Url;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RequestScoped
-@Delegate
+@ResourceDelegate
 public class UrlShortenerDelegate implements UrlShortenerCreateResource {
     private final Logger log = Logger.getLogger(getClass().getName());
     private final UrlShortenerCreateService urlShortenerCreateService;

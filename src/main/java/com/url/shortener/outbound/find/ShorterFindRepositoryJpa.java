@@ -1,6 +1,7 @@
 package com.url.shortener.outbound.find;
 
 import com.url.shortener.common.exception.NotFoundException;
+import com.url.shortener.common.transactional.AsyncRunner;
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.domain.find.repository.UrlShorterFindRepository;
 import com.url.shortener.outbound.jpa.ShortUrlEntity;
@@ -22,18 +23,17 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 public class ShorterFindRepositoryJpa implements UrlShorterFindRepository {
 
     private final EntityManager entityManager;
-    private final ManagedExecutor executor;
+    private final AsyncRunner executor;
 
     @Inject
-    public ShorterFindRepositoryJpa(EntityManager entityManager, ManagedExecutor executor) {
+    public ShorterFindRepositoryJpa(EntityManager entityManager, AsyncRunner executor) {
         this.entityManager = entityManager;
         this.executor = executor;
     }
 
     @Override
-    @Transactional
     public CompletionStage<Url> find(String code) {
-        return supplyAsync(() -> findSync(code), executor);
+        return supplyAsync(() -> findSync(code));
     }
 
     public Url findSync(String code) {
