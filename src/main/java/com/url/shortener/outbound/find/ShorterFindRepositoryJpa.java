@@ -8,16 +8,12 @@ import com.url.shortener.outbound.jpa.ShortUrlEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
-import org.eclipse.microprofile.context.ManagedExecutor;
 
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
-import java.util.concurrent.Executor;
 
 import static com.url.shortener.outbound.jpa.QueryParameters.CODE;
 import static com.url.shortener.outbound.jpa.ShortUrlEntity.URL_FIND_BY_CODE;
-import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @ApplicationScoped
 public class ShorterFindRepositoryJpa implements UrlShorterFindRepository {

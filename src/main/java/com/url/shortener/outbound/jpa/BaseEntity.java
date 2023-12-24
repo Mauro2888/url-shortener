@@ -5,16 +5,15 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.generator.Generator;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @MappedSuperclass
 public abstract class BaseEntity {
-
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false,
             nullable = false, name = "id")
     private UUID id;
