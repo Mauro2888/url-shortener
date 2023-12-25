@@ -10,14 +10,12 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.transaction.Transactional;
 import org.jboss.logging.Logger;
 
 import java.util.concurrent.CompletionStage;
 
 import static com.url.shortener.outbound.jpa.QueryParameters.CODE;
 import static com.url.shortener.outbound.jpa.ShortUrlEntity.URL_FIND_BY_CODE;
-import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static org.jboss.logging.Logger.Level.INFO;
 
 @ApplicationScoped
@@ -50,7 +48,6 @@ public class ShorterCreateRepositoryJpa implements UrlShorterCreateRepository {
                 .setMaxResults(1)
                 .getResultList()
                 .isEmpty();
-
         if (notFound) {
             var shortUrlEntity = shortUrlEntityMapper.apply(url);
             log.log(INFO, "Persisting %s".formatted(shortUrlEntity));
