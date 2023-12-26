@@ -1,12 +1,13 @@
 package com.url.shortener.vm;
 
+import com.url.shortener.common.builder.Builder;
 import jakarta.json.bind.annotation.JsonbTransient;
 
 
+@Builder
 public record UrlShortenerViewModel(String originalUrl,
                                     AlgorithmViewModel algorithmViewModel) {
-
-    public static class Builder {
+   /* public static class Builder {
         private String originalUrl;
         private AlgorithmViewModel algorithmViewModel;
 
@@ -28,5 +29,5 @@ public record UrlShortenerViewModel(String originalUrl,
     @JsonbTransient
     public static Builder builder() {
         return new Builder();
-    }
+    }*/
 }

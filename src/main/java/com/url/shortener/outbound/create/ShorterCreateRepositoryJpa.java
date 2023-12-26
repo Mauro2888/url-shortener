@@ -30,7 +30,7 @@ public class ShorterCreateRepositoryJpa implements UrlShorterCreateRepository {
     @Inject
     public ShorterCreateRepositoryJpa(EntityManager entityManager,
                                       AsyncRunner asyncRunner,
-                                      ShortUrlEntityMapper shortUrlEntityMapper, ShorterFindRepositoryJpa shorterFindRepositoryJpa) {
+                                      ShortUrlEntityMapper shortUrlEntityMapper) {
         this.entityManager = entityManager;
         this.asyncRunner = asyncRunner;
         this.shortUrlEntityMapper = shortUrlEntityMapper;

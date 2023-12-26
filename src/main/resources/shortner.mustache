@@ -26,7 +26,10 @@
                     </form>
                     <div id="resultSection" class="mt-4 d-none">
                         <label for="shortUrl" class="form-label"><strong>ShortURL</strong></label>
-                        <input type="text" class="form-control" id="shortUrl" readonly>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="shortUrl" readonly>
+                            <button class="btn btn-outline-secondary" type="button" id="copyButton">Copy</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,6 +37,16 @@
     </div>
 </div>
 <script>
+    document.getElementById('copyButton').addEventListener('click', function () {
+        const shortUrlInput = document.getElementById('shortUrl');
+        navigator.clipboard.writeText(shortUrlInput.value)
+                .then(() => {
+                    console.log('Text copied to clipboard');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                });
+    });
     document.getElementById('urlShortenerForm').addEventListener('submit', function (event) {
         event.preventDefault();
         const longUrl = document.getElementById('longUrl').value;

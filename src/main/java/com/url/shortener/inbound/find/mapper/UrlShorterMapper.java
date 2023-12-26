@@ -10,8 +10,8 @@ import java.util.function.Function;
 public class UrlShorterMapper implements Function<Url, UrlShortenerViewModel> {
     @Override
     public UrlShortenerViewModel apply(Url url) {
-        return UrlShortenerViewModel.builder()
+        return null; /*UrlShortenerViewModel.builder()
                 .withOriginalUrl(url.originalUrl())
-                .build();
+                .build();*/
     }
 }
