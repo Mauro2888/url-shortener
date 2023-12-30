@@ -5,7 +5,6 @@ import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.domain.find.repository.UrlShorterFindRepository;
 import com.url.shortener.outbound.jpa.ShortUrlEntity;
 import common.exception.NotFoundException;
-import common.logger.Log;
 import common.transactional.AsyncRunner;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -18,7 +17,6 @@ import static com.url.shortener.outbound.jpa.QueryParameters.CODE;
 import static com.url.shortener.outbound.jpa.ShortUrlEntity.URL_FIND_BY_CODE;
 
 @ApplicationScoped
-@Log
 public class ShorterFindRepositoryJpa implements UrlShorterFindRepository {
 
     private final EntityManager entityManager;
@@ -36,9 +34,10 @@ public class ShorterFindRepositoryJpa implements UrlShorterFindRepository {
     }
 
     public Url findSync(String code) {
-        var query = Optional.ofNullable(entityManager.createNamedQuery(URL_FIND_BY_CODE, ShortUrlEntity.class)
-                        .setParameter(CODE, code)
-                        .getSingleResult())
+        var query = entityManager.createNamedQuery(URL_FIND_BY_CODE, ShortUrlEntity.class)
+                .setParameter(CODE, code)
+                .getResultStream()
+                .findFirst()
                 .orElseThrow(() -> new NotFoundException("Not found"));
         return Url.builder()
                 .withOriginalUrl(query.getOriginalUrl())

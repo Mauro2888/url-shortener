@@ -3,7 +3,7 @@ package com.url.shortener.inbound.find.mapper;
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.vm.UrlShortenerViewModel;
 import com.url.shortener.vm.UrlShortenerViewModelBuilder;
-import common.logger.Log;
+
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.util.function.Function;
