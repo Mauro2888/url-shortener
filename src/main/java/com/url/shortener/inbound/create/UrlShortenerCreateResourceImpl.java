@@ -1,11 +1,10 @@
 package com.url.shortener.inbound.create;
 
-import com.url.shortener.common.qualifier.ResourceDelegate;
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.vm.UrlShortenerViewModel;
+import common.qualifier.ResourceDelegate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
-import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

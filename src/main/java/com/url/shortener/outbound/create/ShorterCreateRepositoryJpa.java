@@ -1,11 +1,12 @@
 package com.url.shortener.outbound.create;
 
-import com.url.shortener.common.transactional.AsyncRunner;
+
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.domain.create.repository.UrlShorterCreateRepository;
 import com.url.shortener.outbound.create.mapper.ShortUrlEntityMapper;
 import com.url.shortener.outbound.find.ShorterFindRepositoryJpa;
 import com.url.shortener.outbound.jpa.ShortUrlEntity;
+import common.transactional.AsyncRunner;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;

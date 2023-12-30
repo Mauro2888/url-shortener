@@ -1,6 +1,6 @@
 package com.url.shortener.inbound.find;
 
-import com.url.shortener.common.qualifier.ResourceDelegate;
+import common.qualifier.ResourceDelegate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
