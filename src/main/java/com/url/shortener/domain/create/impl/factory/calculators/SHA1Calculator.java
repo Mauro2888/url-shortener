@@ -3,6 +3,7 @@ package com.url.shortener.domain.create.impl.factory.calculators;
 import com.url.shortener.domain.create.impl.factory.Calculate;
 import com.url.shortener.domain.create.model.Algorithm;
 import com.url.shortener.domain.create.model.Url;
+import com.url.shortener.domain.create.model.UrlBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.xml.bind.DatatypeConverter;
 
@@ -21,7 +22,7 @@ public class SHA1Calculator implements Calculate {
             MessageDigest msdDigest = MessageDigest.getInstance("SHA-1");
             msdDigest.update(url.getBytes(StandardCharsets.UTF_8), 0, url.length());
             var sha1 = DatatypeConverter.printHexBinary(msdDigest.digest()) .substring(0, 8).toLowerCase();
-            return completedStage(Url.builder()
+            return completedStage(new UrlBuilder()
                     .withCode(sha1)
                     .withOriginalUrl(url)
                     .withShortUrl("http://shortner.com/".concat(sha1))

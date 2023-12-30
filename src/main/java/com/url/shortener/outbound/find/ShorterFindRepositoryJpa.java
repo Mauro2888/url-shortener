@@ -2,6 +2,7 @@ package com.url.shortener.outbound.find;
 
 
 import com.url.shortener.domain.create.model.Url;
+import com.url.shortener.domain.create.model.UrlBuilder;
 import com.url.shortener.domain.find.repository.UrlShorterFindRepository;
 import com.url.shortener.outbound.jpa.ShortUrlEntity;
 import common.exception.NotFoundException;
@@ -39,7 +40,7 @@ public class ShorterFindRepositoryJpa implements UrlShorterFindRepository {
                 .getResultStream()
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException("Not found"));
-        return Url.builder()
+        return new UrlBuilder()
                 .withOriginalUrl(query.getOriginalUrl())
                 .build();
     }
