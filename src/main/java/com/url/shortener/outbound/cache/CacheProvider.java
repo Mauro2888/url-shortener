@@ -13,9 +13,9 @@ import java.util.logging.Logger;
 
 @ApplicationScoped
 public class CacheProvider {
-
     private final Logger log = Logger.getLogger(getClass().getName());
     private final Cache<String, Url> cache;
+
     @Inject
     public CacheProvider() {
         this.cache = Caffeine.newBuilder()
@@ -29,12 +29,20 @@ public class CacheProvider {
     }
 
     public void cacheResult(String userId, Url url) {
+        log.info("Cache result for key %s".formatted(userId));
         cache.put(userId, url);
     }
 
-    public void logAll() {
+    private void getAll() {
         log.info("Cache size %s".formatted(cache.estimatedSize()));
         cache.asMap().forEach((key, value) -> log.info("Key %s, value %s".formatted(key, value)));
+    }
+
+    private void clearAll() {
+        cache.invalidateAll();
+    }
+    private void clearCacheByKey(String key) {
+        cache.invalidate(key);
     }
 
 }
