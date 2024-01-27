@@ -53,7 +53,7 @@ public class ShorterCreateRepositoryJpa implements UrlShorterCreateRepository {
         existingUrl.ifPresentOrElse(
                 existing -> log.log(INFO, "Url %s already exists".formatted(url)),
                 () -> {
-                    ShortUrlEntity shortUrlEntity = shortUrlEntityMapper.apply(url);
+                    var shortUrlEntity = shortUrlEntityMapper.apply(url);
                     log.log(INFO, "Persisting %s".formatted(shortUrlEntity.getShortUrl()));
                     entityManager.persist(shortUrlEntity);
                 }
