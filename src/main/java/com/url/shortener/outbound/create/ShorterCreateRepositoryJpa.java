@@ -13,6 +13,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.jboss.logging.Logger;
 
+import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
 import static com.url.shortener.outbound.jpa.QueryParameters.CODE;
@@ -44,16 +45,20 @@ public class ShorterCreateRepositoryJpa implements UrlShorterCreateRepository {
 
     private Url createSync(Url url) {
         log.log(INFO, "Creating url %s".formatted(url));
-        var notFound = entityManager.createNamedQuery(URL_FIND_BY_CODE, ShortUrlEntity.class)
+        var existingUrl = entityManager.createNamedQuery(URL_FIND_BY_CODE, ShortUrlEntity.class)
                 .setParameter(CODE, url.code())
-                .setMaxResults(1)
-                .getResultList()
-                .isEmpty();
-        if (notFound) {
-            var shortUrlEntity = shortUrlEntityMapper.apply(url);
-            log.log(INFO, "Persisting %s".formatted(shortUrlEntity));
-            entityManager.persist(shortUrlEntity);
-        }
+                .getResultStream()
+                .findFirst();
+
+        existingUrl.ifPresentOrElse(
+                existing -> log.log(INFO, "Url %s already exists".formatted(url)),
+                () -> {
+                    ShortUrlEntity shortUrlEntity = shortUrlEntityMapper.apply(url);
+                    log.log(INFO, "Persisting %s".formatted(shortUrlEntity.getShortUrl()));
+                    entityManager.persist(shortUrlEntity);
+                }
+        );
+
         return url;
     }
 }
