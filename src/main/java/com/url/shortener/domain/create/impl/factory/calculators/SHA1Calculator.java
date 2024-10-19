@@ -12,21 +12,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.CompletionStage;
 
-import static java.util.concurrent.CompletableFuture.completedStage;
 
 @ApplicationScoped
 public class SHA1Calculator implements Calculate {
     @Override
-    public CompletionStage<Url> generate(String url) {
+    public Url generate(String url) {
         try {
             MessageDigest msdDigest = MessageDigest.getInstance("SHA-1");
             msdDigest.update(url.getBytes(StandardCharsets.UTF_8), 0, url.length());
             var sha1 = DatatypeConverter.printHexBinary(msdDigest.digest()) .substring(0, 8).toLowerCase();
-            return completedStage(new UrlBuilder()
+            return Url.builder()
                     .withCode(sha1)
                     .withOriginalUrl(url)
                     .withShortUrl("http://shortner.com/".concat(sha1))
-                    .build());
+                    .build();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

@@ -16,16 +16,16 @@ import static java.util.concurrent.CompletableFuture.completedStage;
 @ApplicationScoped
 public class MD5Calculator implements Calculate {
     @Override
-    public CompletionStage<Url> generate(String url) {
+    public Url generate(String url) {
         try {
             var messageDigest = MessageDigest.getInstance("MD5");
             var digest = messageDigest.digest(url.getBytes());
             var result = Base64.getEncoder().encodeToString(digest).substring(0, 8).toLowerCase();
-            return completedStage(new UrlBuilder()
+            return Url.builder()
                     .withCode(result)
                     .withOriginalUrl(url)
                     .withShortUrl("http://shortner.com/".concat(result))
-                    .build());
+                    .build();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
