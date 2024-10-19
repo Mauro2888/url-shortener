@@ -14,14 +14,14 @@ import static java.util.concurrent.CompletableFuture.completedStage;
 @ApplicationScoped
 public class UUIDCalculator implements Calculate {
     @Override
-    public CompletionStage<Url> generate(String url) {
+    public Url generate(String url) {
         var result = UUID.randomUUID().toString().replaceAll("-", "")
                 .substring(0, 8).toLowerCase();
-        return completedStage(new UrlBuilder()
+        return Url.builder()
                 .withCode(result)
                 .withOriginalUrl(url)
                 .withShortUrl("http://shortner.com/".concat(result))
-                .build());
+                .build();
     }
 
     @Override

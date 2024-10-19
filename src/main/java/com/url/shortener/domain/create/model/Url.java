@@ -6,4 +6,8 @@ import common.builder.Builder;
 public record Url(String originalUrl,
                   String shortUrl,
                   String code) {
+    
+    public static UrlBuilder builder(){
+        return new UrlBuilder();
+    }
 }

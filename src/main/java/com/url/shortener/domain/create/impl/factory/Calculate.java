@@ -6,7 +6,7 @@ import com.url.shortener.domain.create.model.Url;
 import java.util.concurrent.CompletionStage;
 
 public interface Calculate {
-    CompletionStage<Url> generate(String url);
+    Url generate(String url);
 
     Algorithm algoType();
 }

@@ -5,6 +5,7 @@ import com.url.shortener.domain.create.UrlShortenerCreateService;
 import com.url.shortener.domain.create.model.Algorithm;
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.domain.create.model.UrlShortener;
+import com.url.shortener.domain.create.model.UrlShortenerBuilder;
 import com.url.shortener.vm.UrlShortenerViewModel;
 import common.qualifier.ResourceDelegate;
 import jakarta.enterprise.context.RequestScoped;
@@ -29,8 +30,11 @@ public class UrlShortenerDelegate implements UrlShortenerCreateResource {
     @Override
     public CompletionStage<Url> create(UrlShortenerViewModel urlShortenerViewModel) {
         log.log(Level.INFO,()-> "Generating short url from url: %s".formatted(urlShortenerViewModel.originalUrl()));
-        var promise = urlShortenerCreateService.create(new UrlShortener(urlShortenerViewModel.originalUrl(),
-                Algorithm.valueOf(urlShortenerViewModel.algorithmViewModel().name())));
+        var request = UrlShortenerBuilder.builder()
+                .withAlgorithm(Algorithm.valueOf(urlShortenerViewModel.algorithmViewModel().name()))
+                .withUrl(urlShortenerViewModel.originalUrl())
+                .build();
+        var promise = urlShortenerCreateService.create(request);
         promise.thenApply(unused -> Response.status(201).build());
         promise.exceptionally(exception -> {
             log.log(Level.SEVERE, "Error creating url", exception);

@@ -1,6 +1,7 @@
 package com.url.shortener.domain.create.impl.factory;
 
 import com.url.shortener.domain.create.model.Algorithm;
+import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.ext.Provider;

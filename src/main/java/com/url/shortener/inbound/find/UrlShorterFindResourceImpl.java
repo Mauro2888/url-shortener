@@ -30,7 +30,7 @@ public class UrlShorterFindResourceImpl implements UrlShorterFindResource {
 
     @Override
     @GET
-    @APIResponse(responseCode = "200", description = "Url found")
+    @APIResponse(responseCode = "302", description = "Url found")
     @APIResponse(responseCode = "400", description = "Bad request")
     @APIResponse(responseCode = "500", description = "Internal server error")
     public CompletionStage<Response> find(
