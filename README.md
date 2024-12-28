@@ -1,6 +1,6 @@
 # URL Shortener Service
 
-A simple URL shortening service built with Jakarta EE that provides URL shortening capabilities with multiple hashing algorithm support, persistent storage, and a user-friendly web interface.
+A simple URL shortening service built with Jakarta EE (Quarkus and microprofile) that provides URL shortening capabilities with multiple hashing algorithm support, persistent storage, and a user-friendly web interface.
 
 ## Overview
 
