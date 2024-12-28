@@ -1,70 +1,144 @@
-# url-shortener
+# URL Shortener Service
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+A simple URL shortening service built with Jakarta EE that provides URL shortening capabilities with multiple hashing algorithm support, persistent storage, and a user-friendly web interface.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Overview
 
-## Running the application in dev mode
+This service allows you to:
+- Create shortened URLs using different hashing algorithms (MD5, UUID, SHA1)
+- Retrieve and redirect to original URLs using shortened codes
+- Store URL mappings in a PostgreSQL database
+- Access the service through a modern web interface
 
-You can run your application in dev mode that enables live coding using:
+## Frontend Interface
 
-```shell script
-./mvnw compile quarkus:dev
+### Web Interface
+The service provides a clean, Bootstrap-based web interface for URL shortening:
+- Dark theme modern design
+- Mobile-responsive layout
+- Real-time URL shortening
+- Copy-to-clipboard functionality
+
+
+### Frontend Dependencies
+- Bootstrap 5.3.2 (CSS and JS Bundle)
+- Mustache template engine
+
+### Screenshot
+[Add a screenshot of your UI here]
+
+## Architecture
+
+
+### API Endpoints
+
+#### 1. Create Shortened URL
+- **Endpoint**: `POST /api/v1/shortener`
+- **Content-Type**: `application/json`
+- **Request Body**:
+```json
+{
+    "originalUrl": "https://example.com/very-long-url",
+    "algorithmViewModel": "MD5"  // Can be: "MD5", "UUID", or "SHA1"
+}
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+#### 2. Retrieve Original URL
+- **Endpoint**: `GET /api/v1/shortener?code={shortCode}`
+- **Response**: HTTP 302 redirect to original URL
+- **Example**: `/api/v1/shortener?code=3b4d5f6d`
 
-## Packaging and running the application
+### Supported Algorithms
 
-The application can be packaged using:
-
-```shell script
-./mvnw package
+The service supports three hashing algorithms:
+```java
+public enum AlgorithmViewModel {
+    MD5,    // MD5 hashing algorithm
+    UUID,   // UUID-based generation
+    SHA1    // SHA1 hashing algorithm
+}
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+### Database Schema
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+```sql
+CREATE SCHEMA IF NOT EXISTS short_url;
 
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+CREATE TABLE short_url.urls (
+    id              UUID         NOT NULL,
+    original_url    VARCHAR(255) NOT NULL,
+    short_url       VARCHAR(255) NOT NULL,
+    hashcode        VARCHAR(255) NOT NULL,
+    insert_datetime TIMESTAMPTZ,
+    update_datetime TIMESTAMPTZ  NOT NULL,
+    version         INT8         NOT NULL,
+    PRIMARY KEY (id)
+);
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+## Technical Stack
 
-## Creating a native executable
+- **Backend Framework**: Jakarta EE with Quarkus 3.16.2
+- **Frontend Framework**: Bootstrap 5.3.2
+- **Template Engine**: Mustache
+- **Database**: PostgreSQL
+- **Build Tool**: Maven
+- **API Documentation**: OpenAPI/Swagger annotations
+- **Dependency Injection**: CDI
 
-You can create a native executable using:
 
-```shell script
-./mvnw package -Dnative
+2. **URL Shortening**
+  - Multiple algorithm support:
+    - MD5: Creates hash using MD5 algorithm
+    - UUID: Generates unique identifier
+    - SHA1: Creates hash using SHA1 algorithm
+  - Configurable hash generation
+  - Duplicate URL detection
+
+3. **URL Retrieval**
+  - Fast lookups using hash codes
+  - HTTP redirects to original URLs
+  - Error handling for invalid codes
+
+4. **Data Persistence**
+  - Version control for URL entries
+  - Timestamp tracking
+  - UUID-based identification
+
+## Getting Started
+
+1. **Database Setup**
+```sql
+-- Run the schema creation script
+CREATE SCHEMA IF NOT EXISTS short_url;
+set schema 'short_url';
+
+-- Create the urls table
+CREATE TABLE IF NOT EXISTS urls (
+    -- table definition as shown above
+);
+```
+## Usage
+
+### Web Interface
+1. Open your browser and navigate to the application URL
+2. Enter a long URL in the input field
+3. Click "Generate short URL"
+4. Copy the generated short URL from the result field
+
+### API Examples
+
+1. **Creating a Short URL with MD5**
+```bash
+curl -X POST http://your-server/api/v1/shortener \
+  -H "Content-Type: application/json" \
+  -d '{
+    "originalUrl": "https://example.com/very-long-url",
+    "algorithmViewModel": "MD5"
+  }'
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+2. **Accessing a Shortened URL**
+```bash
+curl -L http://your-server/api/v1/shortener?code=3b4d5f6d
 ```
-
-You can then execute your native executable with: `./target/url-shortener-1.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- Hibernate Validator ([guide](https://quarkus.io/guides/validation)): Validate object properties (field, getter) and
-  method parameters for your beans (REST, CDI, Jakarta Persistence)
-- RESTEasy Classic JSON-B ([guide](https://quarkus.io/guides/rest-json)): JSON-B serialization support for RESTEasy
-  Classic
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-
-## Provided Code
-
-### RESTEasy JAX-RS
-
-Easily start your RESTful Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
