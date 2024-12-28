@@ -29,11 +29,11 @@ public class UrlShortenerDelegate implements UrlShortenerCreateResource {
 
     @Override
     public CompletionStage<Url> create(UrlShortenerViewModel urlShortenerViewModel) {
-        log.log(Level.INFO,()-> "Generating short url from url: %s".formatted(urlShortenerViewModel.originalUrl()));
+        log.info(()-> "Generating short url from url: %s".formatted(urlShortenerViewModel.originalUrl()));
 
         var request = UrlShortener.builder()
             .withUrl(urlShortenerViewModel.originalUrl())
-            .withAlgorithm( Algorithm.valueOf(urlShortenerViewModel.algorithmViewModel().name()))
+            .withAlgorithm(Algorithm.valueOf(urlShortenerViewModel.algorithmViewModel().name()))
             .build();
 
         var promise = urlShortenerCreateService.create(request);

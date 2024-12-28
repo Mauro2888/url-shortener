@@ -8,15 +8,25 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "urls")
-@NamedQuery(name = ShortUrlEntity.URL_FIND_BY_CODE, query = "SELECT u FROM ShortUrlEntity u WHERE u.code = :CODE")
+@NamedQuery(
+    name = ShortUrlEntity.FIND_URL_BY_CODE, query = """
+    SELECT u FROM ShortUrlEntity u WHERE u.code = :CODE
+    """
+)
+@NamedQuery(
+    name = ShortUrlEntity.FIND_CODE_BY_LONG_URL, query = """
+    SELECT url from ShortUrlEntity url WHERE url.originalUrl =: LONG_URL
+    """
+)
 public class ShortUrlEntity extends BaseEntity {
 
-    public static final String URL_FIND_BY_CODE = "URL_FIND_BY_CODE";
-    @Column(name = "original_url",unique = true)
+    public static final String FIND_URL_BY_CODE = "URL_FIND_BY_CODE";
+    public static final String FIND_CODE_BY_LONG_URL = "FIND_CODE_BY_LONG_URL";
+    @Column(name = "original_url", unique = true)
     private String originalUrl;
-    @Column(name = "short_url",unique = true)
+    @Column(name = "short_url", unique = true)
     private String shortUrl;
-    @Column(name = "hashcode",unique = true)
+    @Column(name = "hashcode", unique = true)
     private String code;
 
     public ShortUrlEntity() {
@@ -55,19 +65,18 @@ public class ShortUrlEntity extends BaseEntity {
             return this;
         }
 
-        public Builder withCode(String code){
+        public Builder withCode(String code) {
             this.code = code;
             return this;
         }
 
         public ShortUrlEntity build() {
-            return new ShortUrlEntity(originalUrl, shortUrl,code);
+            return new ShortUrlEntity(originalUrl, shortUrl, code);
         }
     }
 
     public static Builder builder() {
         return new Builder();
     }
-
 
 }
