@@ -1,7 +1,7 @@
 package com.url.shortener.inbound.find;
 
 import com.url.shortener.domain.find.UrlShorterFindService;
-import common.qualifier.ResourceDelegate;
+import common.be.common.rest.qualifier.InboundDelegate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
@@ -14,7 +14,7 @@ import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.SEVERE;
 
 @RequestScoped
-@ResourceDelegate
+@InboundDelegate
 public class UrlShorterFindDelegate implements UrlShorterFindResource {
 
     private final Logger log = Logger.getLogger(getClass().getName());

@@ -1,6 +1,6 @@
 package com.url.shortener.domain.create.model;
 
-import common.builder.Builder;
+import common.be.common.builder.Builder;
 
 @Builder
 public record Url(String originalUrl,
