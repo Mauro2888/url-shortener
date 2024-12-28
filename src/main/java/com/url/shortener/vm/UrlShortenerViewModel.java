@@ -1,8 +1,14 @@
 package com.url.shortener.vm;
 
-import common.builder.Builder;
+import common.be.common.builder.Builder;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Builder
-public record UrlShortenerViewModel(String originalUrl,
-                                    AlgorithmViewModel algorithmViewModel) {
+@Schema(name = "url")
+public record UrlShortenerViewModel(
+    String originalUrl, AlgorithmViewModel algorithmViewModel) {
+
+    public static UrlShortenerViewModelBuilder builder() {
+        return new UrlShortenerViewModelBuilder();
+    }
 }

@@ -2,7 +2,7 @@ package com.url.shortener.inbound.create;
 
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.vm.UrlShortenerViewModel;
-import common.qualifier.ResourceDelegate;
+import common.be.common.rest.qualifier.InboundDelegate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -18,8 +18,8 @@ import java.util.concurrent.CompletionStage;
 
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@RequestScoped
 @Path("api/v1/shortener")
+@RequestScoped
 @Produces(APPLICATION_JSON)
 @Consumes(APPLICATION_JSON)
 public class UrlShortenerCreateResourceImpl implements UrlShortenerCreateResource {
@@ -27,7 +27,7 @@ public class UrlShortenerCreateResourceImpl implements UrlShortenerCreateResourc
     private final UrlShortenerCreateResource delegate;
 
     @Inject
-    public UrlShortenerCreateResourceImpl(@ResourceDelegate UrlShortenerCreateResource delegate) {
+    public UrlShortenerCreateResourceImpl(@InboundDelegate UrlShortenerCreateResource delegate) {
         this.delegate = delegate;
     }
 
@@ -41,8 +41,7 @@ public class UrlShortenerCreateResourceImpl implements UrlShortenerCreateResourc
                     description = "Url to be shortened",
                     required = true,
                     content = @Content(schema = @Schema(implementation = UrlShortenerViewModel.class))
-            )
-            UrlShortenerViewModel urlShortenerViewModel) {
+            ) UrlShortenerViewModel urlShortenerViewModel) {
         return delegate.create(urlShortenerViewModel);
 
     }

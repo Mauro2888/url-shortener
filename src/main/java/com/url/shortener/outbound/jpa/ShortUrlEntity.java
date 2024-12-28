@@ -1,6 +1,6 @@
 package com.url.shortener.outbound.jpa;
 
-import common.jpa.BaseEntity;
+import common.be.common.jpa.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.NamedQuery;

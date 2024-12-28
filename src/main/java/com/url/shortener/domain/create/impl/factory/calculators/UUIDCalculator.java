@@ -1,5 +1,6 @@
 package com.url.shortener.domain.create.impl.factory.calculators;
 
+import com.url.shortener.domain.create.impl.factory.AlgoType;
 import com.url.shortener.domain.create.impl.factory.Calculate;
 import com.url.shortener.domain.create.model.Algorithm;
 import com.url.shortener.domain.create.model.Url;
@@ -12,6 +13,7 @@ import java.util.concurrent.CompletionStage;
 import static java.util.concurrent.CompletableFuture.completedStage;
 
 @ApplicationScoped
+@AlgoType(algorithm = Algorithm.UUID)
 public class UUIDCalculator implements Calculate {
     @Override
     public Url generate(String url) {
@@ -22,10 +24,5 @@ public class UUIDCalculator implements Calculate {
                 .withOriginalUrl(url)
                 .withShortUrl("http://shortner.com/".concat(result))
                 .build();
-    }
-
-    @Override
-    public Algorithm algoType() {
-        return Algorithm.UUID;
     }
 }

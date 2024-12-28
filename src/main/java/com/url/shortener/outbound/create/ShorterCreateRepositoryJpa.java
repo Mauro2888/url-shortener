@@ -6,7 +6,7 @@ import com.url.shortener.domain.create.repository.UrlShorterCreateRepository;
 import com.url.shortener.outbound.create.mapper.ShortUrlEntityMapper;
 import com.url.shortener.outbound.find.ShorterFindRepositoryJpa;
 import com.url.shortener.outbound.jpa.ShortUrlEntity;
-import common.transactional.AsyncRunner;
+import common.be.common.jpa.transactional.AsyncTransactionRunner;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -24,23 +24,23 @@ import static org.jboss.logging.Logger.Level.INFO;
 public class ShorterCreateRepositoryJpa implements UrlShorterCreateRepository {
 
     private final Logger log = Logger.getLogger(getClass().getName());
-    @PersistenceContext
+
     private final EntityManager entityManager;
-    private final AsyncRunner asyncRunner;
+    private final AsyncTransactionRunner transactionRunner;
     private final ShortUrlEntityMapper shortUrlEntityMapper;
 
     @Inject
     public ShorterCreateRepositoryJpa(EntityManager entityManager,
-                                      AsyncRunner asyncRunner,
+        AsyncTransactionRunner transactionRunner,
                                       ShortUrlEntityMapper shortUrlEntityMapper, ShorterFindRepositoryJpa shorterFindRepositoryJpa) {
         this.entityManager = entityManager;
-        this.asyncRunner = asyncRunner;
+        this.transactionRunner = transactionRunner;
         this.shortUrlEntityMapper = shortUrlEntityMapper;
     }
 
     @Override
     public CompletionStage<Url> create(Url url) {
-        return asyncRunner.supplyAsync(() -> createSync(url));
+        return transactionRunner.supplyAsync(() -> createSync(url));
     }
 
     private Url createSync(Url url) {

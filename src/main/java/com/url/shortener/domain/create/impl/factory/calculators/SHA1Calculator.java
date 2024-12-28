@@ -1,19 +1,19 @@
 package com.url.shortener.domain.create.impl.factory.calculators;
 
+import com.url.shortener.domain.create.impl.factory.AlgoType;
 import com.url.shortener.domain.create.impl.factory.Calculate;
 import com.url.shortener.domain.create.model.Algorithm;
 import com.url.shortener.domain.create.model.Url;
-import com.url.shortener.domain.create.model.UrlBuilder;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.xml.bind.DatatypeConverter;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.CompletionStage;
 
 
 @ApplicationScoped
+@AlgoType(algorithm = Algorithm.SHA1)
 public class SHA1Calculator implements Calculate {
     @Override
     public Url generate(String url) {
@@ -29,10 +29,5 @@ public class SHA1Calculator implements Calculate {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public Algorithm algoType() {
-        return Algorithm.SHA1;
     }
 }

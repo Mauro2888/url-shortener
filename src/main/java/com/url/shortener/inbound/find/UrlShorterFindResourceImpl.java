@@ -1,6 +1,6 @@
 package com.url.shortener.inbound.find;
 
-import common.qualifier.ResourceDelegate;
+import common.be.common.rest.qualifier.InboundDelegate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -24,7 +24,7 @@ public class UrlShorterFindResourceImpl implements UrlShorterFindResource {
     private final UrlShorterFindResource delegate;
 
     @Inject
-    public UrlShorterFindResourceImpl(@ResourceDelegate UrlShorterFindResource delegate) {
+    public UrlShorterFindResourceImpl(@InboundDelegate UrlShorterFindResource delegate) {
         this.delegate = delegate;
     }
 
