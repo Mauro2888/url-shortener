@@ -10,25 +10,12 @@ This service allows you to:
 - Store URL mappings in a PostgreSQL database
 - Access the service through a modern web interface
 
-## Frontend Interface
-
-### Web Interface
-The service provides a clean, Bootstrap-based web interface for URL shortening:
-- Dark theme modern design
-- Mobile-responsive layout
-- Real-time URL shortening
-- Copy-to-clipboard functionality
-
-
 ### Frontend Dependencies
 - Bootstrap 5.3.2 (CSS and JS Bundle)
 - Mustache template engine
 
-### Screenshot
-[Add a screenshot of your UI here]
 
 ## Architecture
-
 
 ### API Endpoints
 
