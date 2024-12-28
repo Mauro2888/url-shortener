@@ -4,6 +4,6 @@ import com.url.shortener.domain.create.model.Url;
 
 import java.util.concurrent.CompletionStage;
 
-public interface UrlShorterFindRepository {
+public interface UrlShorterFindByCodeRepository {
     CompletionStage<Url>find(String code);
 }
