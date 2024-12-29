@@ -2,6 +2,7 @@ package com.url.shortener.inbound.create;
 
 import com.url.shortener.domain.create.model.Url;
 import com.url.shortener.vm.UrlShortenerViewModel;
+import com.url.shortener.vm.UrlViewModel;
 import common.be.common.rest.qualifier.InboundDelegate;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -46,7 +47,7 @@ public class UrlShortenerCreateResourceImpl implements UrlShortenerCreateResourc
             <br>This endpoint generate shortened url.
             """
     )
-    public CompletionStage<Url> create(
+    public CompletionStage<UrlViewModel> create(
             @RequestBody(
                     description = "Url to be shortened",
                     required = true,

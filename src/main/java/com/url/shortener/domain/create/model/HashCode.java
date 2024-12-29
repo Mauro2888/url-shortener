@@ -1,6 +1,4 @@
 package com.url.shortener.domain.create.model;
 
-public enum Algorithm {
-    MD5,
-    SHA1
+public record HashCode(String value) {
 }

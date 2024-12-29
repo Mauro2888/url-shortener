@@ -8,7 +8,7 @@ public record Url(String originalUrl,
                   String shortUrl,
                   String code) {
 
-    @JsonbTransient
+
     public static UrlBuilder builder(){
         return new UrlBuilder();
     }
