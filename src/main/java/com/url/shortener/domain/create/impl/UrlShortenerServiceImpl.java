@@ -19,17 +19,13 @@ public class UrlShortenerServiceImpl implements UrlShortenerCreateService {
     private final Logger log = Logger.getLogger(getClass().getName());
     private final UrlHashingServiceCalculator urlHashingServiceCalculator;
     private final UrlShorterCreateRepository urlShorterCreateRepository;
-    private final UrlShorterFindByLongUrlRepository urlShorterFindByLongUrlRepository;
 
     @Inject
     public UrlShortenerServiceImpl(
         UrlHashingServiceCalculator urlHashingServiceCalculator,
-        UrlShorterCreateRepository urlShorterCreateRepository,
-        UrlShorterFindByLongUrlRepository urlShorterFindByLongUrlRepository
-    ) {
+        UrlShorterCreateRepository urlShorterCreateRepository) {
         this.urlHashingServiceCalculator = urlHashingServiceCalculator;
         this.urlShorterCreateRepository = urlShorterCreateRepository;
-        this.urlShorterFindByLongUrlRepository = urlShorterFindByLongUrlRepository;
     }
 
     @Override
