@@ -5,7 +5,7 @@ A simple URL shortening service built with Jakarta EE (Quarkus and microprofile)
 ## Overview
 
 This service allows you to:
-- Create shortened URLs using different hashing algorithms (MD5, UUID, SHA1)
+- Create shortened URLs using different hashing algorithms (MD5, SHA1)
 - Retrieve and redirect to original URLs using shortened codes
 - Store URL mappings in a PostgreSQL database
 - Access the service through a modern web interface
@@ -26,7 +26,7 @@ This service allows you to:
 ```json
 {
     "originalUrl": "https://example.com/very-long-url",
-    "algorithmViewModel": "MD5"  // Can be: "MD5", "UUID", or "SHA1"
+    "algorithmViewModel": "MD5"  // Can be: "MD5", "SHA1"
 }
 ```
 
@@ -41,7 +41,6 @@ The service supports three hashing algorithms:
 ```java
 public enum AlgorithmViewModel {
     MD5,    // MD5 hashing algorithm
-    UUID,   // UUID-based generation
     SHA1    // SHA1 hashing algorithm
 }
 ```
@@ -77,7 +76,6 @@ CREATE TABLE short_url.urls (
 2. **URL Shortening**
   - Multiple algorithm support:
     - MD5: Creates hash using MD5 algorithm
-    - UUID: Generates unique identifier
     - SHA1: Creates hash using SHA1 algorithm
   - Configurable hash generation
   - Duplicate URL detection
