@@ -26,7 +26,7 @@ This service allows you to:
 ```json
 {
     "originalUrl": "https://example.com/very-long-url",
-    "algorithmViewModel": "MD5"  // Can be: "MD5", "SHA1"
+    "algorithm": "MD5"  // Can be: "MD5", "SHA1"
 }
 ```
 
@@ -119,7 +119,7 @@ curl -X POST http://your-server/api/v1/shortener \
   -H "Content-Type: application/json" \
   -d '{
     "originalUrl": "https://example.com/very-long-url",
-    "algorithmViewModel": "MD5"
+    "algorithm": "MD5"
   }'
 ```
 
